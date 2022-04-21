@@ -1,6 +1,6 @@
 package com.dao;
 
-import java.util.List;         
+import java.util.List;        
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ public class Test_MgmtDAOImpl implements Test_MgmtDAO {
      @Autowired
      SessionFactory sessionFactory;
 	public void addTest(Test_Mgmt test) {
-    	 Session session=sessionFactory.openSession();
+        Session session=sessionFactory.openSession();
 		session.getTransaction().begin();
 		session.save(test);
 		session.flush();
@@ -49,7 +49,8 @@ public class Test_MgmtDAOImpl implements Test_MgmtDAO {
 	public boolean deleteTest(int id) {
 		Session session=sessionFactory.openSession();
 		session.getTransaction().begin();
-		session.delete(id);
+		Test_Mgmt test = session.find(Test_Mgmt.class,id);
+		session.delete(test);
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
